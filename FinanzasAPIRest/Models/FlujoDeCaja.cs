@@ -18,6 +18,6 @@ namespace FinanzasAPIRest.Models
         //[RegularExpression(@"^\d+(\.\d{1,2})?$")]
         //[Range(0,9999999999.99)]
         [Column(TypeName ="decimal(10,2)")]
-        public decimal Monto { get; set; }
+        public decimal Monto { get; set; }        
     }
 }

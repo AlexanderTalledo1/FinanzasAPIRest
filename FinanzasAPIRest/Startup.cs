@@ -39,6 +39,7 @@ namespace FinanzasAPIRest
             services.AddDbContext<FinanzasContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUsuarioRepository, UsuarioService>();
+            services.AddScoped<IDatosBonoRepository, DatosBonoService>();
             
             services.AddSwaggerGen(c =>
             {

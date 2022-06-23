@@ -1,0 +1,107 @@
+﻿@model IEnumerable<FinanzasAPIRest.Models.DatosBono>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorNominal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorComercial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plazo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TasaInteresMercado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimaRedencion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estructuracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colocacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flotacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cavali)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GastosAdicionales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InflacionAnual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Frecuencia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorNominal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorComercial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plazo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TasaInteresMercado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimaRedencion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estructuracion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Colocacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flotacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cavali)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GastosAdicionales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InflacionAnual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frecuencia.NombreUnidad)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdOperacion">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdOperacion">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdOperacion">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
