@@ -73,11 +73,18 @@ namespace FinanzasAPIRest.Controllers
 
         // POST: api/Usuarios      
         [HttpPost]
-        public async Task<ActionResult> PostUsuario([FromBody]Usuario usuario)
+        
+        public async Task<ActionResult> CreateUsuario([FromBody]Usuario usuario)
         {            
             await _usuarios.
-                   Insert(usuario);          
+                   CreateUser(usuario);          
             return CreatedAtAction("GetUsuario", new { id = usuario.IdUsuario }, usuario);
+        }
+        [HttpPost]
+        [Route("api/Usuarios/login")]
+        public ActionResult LoginUsuario(Usuario usuario)
+        {
+            return _usuarios.Login(usuario) != null ? Ok("Bienvenido"):Ok("Error");
         }
 
         // DELETE: api/Usuarios/5

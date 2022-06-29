@@ -40,7 +40,7 @@ namespace FinanzasAPIRest
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUsuarioRepository, UsuarioService>();
             services.AddScoped<IDatosBonoRepository, DatosBonoService>();
-            
+            services.AddScoped<IIndicadorRepository, IndicadorService>();            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FinanzasAPIRest", Version = "v1" });

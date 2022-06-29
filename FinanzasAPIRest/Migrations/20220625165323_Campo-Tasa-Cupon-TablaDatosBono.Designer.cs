@@ -3,14 +3,16 @@ using FinanzasAPIRest.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinanzasAPIRest.Migrations
 {
     [DbContext(typeof(FinanzasContext))]
-    partial class FinanzasContextModelSnapshot : ModelSnapshot
+    [Migration("20220625165323_Campo-Tasa-Cupon-TablaDatosBono")]
+    partial class CampoTasaCuponTablaDatosBono
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,22 +28,22 @@ namespace FinanzasAPIRest.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Cavali")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Colocacion")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Cupon")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Estructuracion")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Flotacion")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("GastosAdicionales")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("IdFrecuencia")
                         .HasColumnType("int");
@@ -50,22 +52,22 @@ namespace FinanzasAPIRest.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("InflacionAnual")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("Plazo")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrimaRedencion")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TasaInteresMercado")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("ValorComercial")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("ValorNominal")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("IdOperacion");
 
@@ -104,28 +106,28 @@ namespace FinanzasAPIRest.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrecioBono")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TCEA_Emisor")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TCEA_Escudo")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TIR_Bonista")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TIR_Emisor")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TIR_Escudo")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("TREA_Bonista")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("VAN")
-                        .HasColumnType("decimal(10,6)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("IdIndicador");
 

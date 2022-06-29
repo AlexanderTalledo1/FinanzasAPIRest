@@ -13,53 +13,56 @@ namespace FinanzasAPIRest.Models
         [Required]
         [Key]
         public int IdOperacion { get; set; }
-        [Column(TypeName = "decimal(10, 2)")]
+
+
+        [Column(TypeName = "decimal(10, 6)")]
+        [Required]
         public decimal ValorNominal { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal ValorComercial { get; set; }
         
         [Required]
         public int Plazo { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
-        public decimal TasaCupon { get; set; }
+        public decimal Cupon { get; set; }
 
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TasaInteresMercado { get; set; }
 
 
-
-
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal PrimaRedencion { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal Estructuracion { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal Colocacion { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal Flotacion { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal Cavali { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal GastosAdicionales { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal InflacionAnual { get; set; }
 

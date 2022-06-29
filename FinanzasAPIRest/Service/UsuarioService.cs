@@ -24,8 +24,11 @@ namespace FinanzasAPIRest.Service
                                                                         Usuario.
                                                                         FindAsync(idUsuario);      
 
-        public async Task Insert(Usuario usuario)
+        public async Task CreateUser(Usuario usuario)
         {
+            Usuario usuario_disponible = _dbContext.Usuario.Where(u => u.Correo.Equals(usuario.Correo) && u.Password.Equals(usuario.Password)).FirstOrDefault();
+
+            
             usuario.Password = CommonMethods.ConvertToEncrypt(usuario.Password);
             await _dbContext.
                     Usuario.
@@ -43,6 +46,15 @@ namespace FinanzasAPIRest.Service
                                                 .Any(usuario =>
                                                      usuario.IdUsuario.
                                                      Equals(IdUsuario)
-                                                    );        
+                                                    );
+        public Usuario Login(Usuario u)         
+        { 
+            Usuario usuarioEncontrado =(from usuario in _dbContext.Usuario  
+                                        where usuario.Correo== u.Correo && 
+                                              CommonMethods.ConvertToDecrypt(usuario.Password) == u.Password
+                                        select usuario).First();
+            return usuarioEncontrado;
+            
+        }
     }
 }

@@ -11,35 +11,35 @@ namespace FinanzasAPIRest.Models
     {
         [Key]
         public int IdIndicador { get; set; }
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TIR_Emisor { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TCEA_Emisor { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TIR_Escudo { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TCEA_Escudo { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TIR_Bonista { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal TREA_Bonista { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal PrecioBono { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
+        [Column(TypeName = "decimal(10, 6)")]
         [Required]
         public decimal VAN { get; set; }
 

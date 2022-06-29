@@ -7,6 +7,6 @@ namespace FinanzasAPIRest.IRepository
 {
     public interface IIndicadorRepository
     {
-        Task Insert(int idOperacion);
+        Task Insert(int IdOperacion);
     }
 }

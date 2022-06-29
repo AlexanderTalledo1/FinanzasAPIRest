@@ -24,23 +24,18 @@ namespace FinanzasAPIRest.Controllers
 
         // GET: api/DatosBonos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DatosBono>>> GetDatosBono()
-        {
-            return await _context.DatosBono.ToListAsync();
+        public ActionResult GetDatosBono()
+        {            
+            List<DatosBono>ListaDatos = _datosBono.FindAll();
+            return ListaDatos != null ? Ok(ListaDatos) : NotFound();
         }
 
         // GET: api/DatosBonos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DatosBono>> GetDatosBono(int id)
+        public async Task<ActionResult> GetDatosBono(int id)
         {
-            var datosBono = await _context.DatosBono.FindAsync(id);
-
-            if (datosBono == null)
-            {
-                return NotFound();
-            }
-
-            return datosBono;
+            DatosBono dato = await _datosBono.FindOperacionById(id);
+            return dato != null ? Ok(dato) : NotFound();
         }
 
         // PUT: api/DatosBonos/5
@@ -70,7 +65,6 @@ namespace FinanzasAPIRest.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 

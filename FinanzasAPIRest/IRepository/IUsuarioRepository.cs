@@ -10,9 +10,10 @@ namespace FinanzasAPIRest.IRepository
     {
         Task<List<Usuario>> FindAll();
         Task<Usuario> FindUserById(int IdUsuario);
-        Task Insert(Usuario usuario);
+        Task CreateUser(Usuario usuario);
         Task Update(Usuario usuario);
         bool UserExist(int IdUsuario);
+        Usuario Login(Usuario u);
        
     }
 }
