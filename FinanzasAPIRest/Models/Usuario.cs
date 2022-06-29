@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+
 namespace FinanzasAPIRest.Models
 {
     [Table("Usuario")]
@@ -20,11 +22,12 @@ namespace FinanzasAPIRest.Models
         [StringLength(200)]
         [Column]
         public string Password { get; set; }
-        [Required(ErrorMessage = "El campo nombre es requerido")]
+        
+        
         [StringLength(100)]
         [Column]
-        public string Nombres { get; set; }
-        [Required(ErrorMessage = "El campo apellido es requerido")]
+        public string Nombres { get; set; }        
+        
         [StringLength(150)]
         [Column]
         public string Apellido { get; set; }

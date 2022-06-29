@@ -48,13 +48,15 @@ namespace FinanzasAPIRest.Service
                                                      Equals(IdUsuario)
                                                     );
         public Usuario Login(Usuario u)         
-        { 
-            Usuario usuarioEncontrado =(from usuario in _dbContext.Usuario  
-                                        where usuario.Correo== u.Correo && 
-                                              CommonMethods.ConvertToDecrypt(usuario.Password) == u.Password
-                                        select usuario).First();
+        {
+            //Usuario usuarioEncontrado =(from usuario in _dbContext.Usuario  
+                                        //where usuario.Correo== u.Correo && 
+                                        //      usuario.Password == u.Password
+                                        //select  new Usuario({ }).First();
+            var usuarioEncontrado= _dbContext.Usuario.Where(x => x.Correo == u.Correo && x.Password == CommonMethods.ConvertToEncrypt( u.Password)).FirstOrDefault();
+
             return usuarioEncontrado;
             
-        }
+        }   
     }
 }
