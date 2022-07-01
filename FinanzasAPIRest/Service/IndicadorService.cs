@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinanzasAPIRest.IRepository;
 using FinanzasAPIRest.Models;
+using Microsoft.VisualBasic;
+
 namespace FinanzasAPIRest.Service
 {
     public class IndicadorService : IIndicadorRepository
@@ -19,8 +21,7 @@ namespace FinanzasAPIRest.Service
         public async Task Insert(int IdOperacion)        
         {                                  
             IndicadorFinanciero indicador = new IndicadorFinanciero();            
-            DatosBono dato= await _datos.FindOperacionById(IdOperacion);
-            //
+            DatosBono dato= await _datos.FindOperacionById(IdOperacion);            
 
             const double impuestoRenta = 0.3;
             decimal gastosAdicionales = -dato.GastosAdicionales * dato.ValorComercial;
@@ -34,6 +35,8 @@ namespace FinanzasAPIRest.Service
             double[] interesCupon = new double[dato.Plazo];
             double[] escudo = new double[dato.Plazo];
 
+            //double[] otroFlujoCaja = new double[dato.Plazo];
+
             //flujos de caja
 
             //periodo cero
@@ -46,8 +49,16 @@ namespace FinanzasAPIRest.Service
             double[] flujoCajaEmisor = new double[dato.Plazo];
             double[] flujoCajaEmisorEscudo = new double[dato.Plazo ];           
 
-            double[] resultadoPrecioBono = new double[dato.Plazo];              
-            
+            double[] resultadoPrecioBono = new double[dato.Plazo];
+
+            //double[] lista
+            double[] lista_tir_emisor = new double[dato.Plazo + 1];
+            double[] lista_tir_emisor_escudo = new double[dato.Plazo + 1];
+            double[] lista_tir_bonista = new double[dato.Plazo + 1];
+            lista_tir_bonista[0] = (double)flujoBonista_Periodo_0;
+            lista_tir_emisor[0] = (double)flujoEmisor_Periodo_0;
+            lista_tir_emisor_escudo[0] = (double)flujoEmisor_Escudo_Periodo_0;
+
             for(int i = 1; i <= dato.Plazo; i++)
             {
                 if (bonoInicial[i-1]==bonoInicial[0])
@@ -56,9 +67,8 @@ namespace FinanzasAPIRest.Service
                 }
                 else
                 {
-                    bonoInicial[i - 1] = bonoFinal[i-2]; //
-                }               
-
+                    bonoInicial[i - 1] = bonoFinal[i-2]; 
+                }             
                 bonoIndexado[i - 1] = bonoInicial[i - 1] * (1 + Convert.ToDouble(dato.InflacionAnual)); //
                 interesCupon[i - 1] = -bonoIndexado[i - 1] * (double)(dato.Cupon);
                 cuota[i - 1] = -bonoIndexado[i - 1] * (double)(dato.Cupon) / (1 - Math.Pow((1 + Convert.ToDouble(dato.Cupon)), -(dato.Plazo - (i-1))));
@@ -68,30 +78,33 @@ namespace FinanzasAPIRest.Service
                 if (flujoCajaEmisor[i - 1] == flujoCajaEmisor[dato.Plazo - 1]) 
                 {
                     double prima = -bonoIndexado[dato.Plazo - 1] * Convert.ToDouble(dato.PrimaRedencion);
-                    flujoCajaEmisor[i - 1] = (cuota[i - 1])+prima;
+                    flujoCajaEmisor[i - 1] = (cuota[i - 1])+prima;                    
                 }
                 else
                 {
                     flujoCajaEmisor[i - 1] = (cuota[i - 1]);
-                }
-               
+                }               
                 flujoCajaEmisorEscudo[i - 1] = flujoCajaEmisor[i - 1] + escudo[i - 1];
                 flujoCajaBonista[i - 1] = -(flujoCajaEmisor[i - 1]);
-                resultadoPrecioBono[i - 1] = flujoCajaBonista[i - 1] / Math.Pow(1 + (double)dato.TasaInteresMercado,i);               
+                resultadoPrecioBono[i - 1] = flujoCajaBonista[i - 1] / Math.Pow(1 + (double)dato.TasaInteresMercado,i);
 
-            }          
-            //indicador.TIR_Bonista = (decimal)(Microsoft.VisualBasic.Financial.IRR(ref projectA) * 100);
-            //indicador.TIR_Emisor= (decimal)(Microsoft.VisualBasic.Financial.IRR(ref flujoCajaEmisor, 0.3) * 100);
-            //indicador.TIR_Escudo= (decimal)(Microsoft.VisualBasic.Financial.IRR(ref flujoCajaEmisorEscudo, 0.3) * 100);
-           
+
+                lista_tir_emisor[i] = flujoCajaEmisor[i - 1];
+                lista_tir_emisor_escudo[i] = flujoCajaEmisorEscudo[i - 1];
+                lista_tir_bonista[i ] = flujoCajaBonista[i - 1];
+                
+
+            }
+            double duracion = 0;
+            double duracionModificada = duracion/(1+(double)dato.TasaInteresMercado);
+
+            indicador.TIR_Emisor = (decimal)(Financial.IRR(ref lista_tir_emisor) * 100);
+            indicador.TIR_Escudo = (decimal)(Financial.IRR(ref lista_tir_emisor_escudo) * 100);
+            indicador.TIR_Bonista = (decimal)(Financial.IRR(ref lista_tir_bonista)*100);            
             indicador.PrecioBono = ((decimal)resultadoPrecioBono.Sum());
             indicador.VAN = indicador.PrecioBono + flujoBonista_Periodo_0;
-
-            indicador.IdOperacion = IdOperacion;
-            indicador.TIR_Emisor = 1;
-            indicador.TCEA_Emisor = 1;
-            indicador.TIR_Escudo = 1;
-            indicador.TIR_Bonista = 1;
+            indicador.IdOperacion = IdOperacion;          
+            indicador.TCEA_Emisor = 1;                      
             indicador.TREA_Bonista = 1;
             indicador.TCEA_Emisor = 1;           
             
